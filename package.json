@@ -1,0 +1,29 @@
+{
+    "name": "@uicpharm/vitepress-theme",
+    "version": "1.0.0",
+    "type": "module",
+    "description": "Standard theme for uicpharm documentation sites.",
+    "scripts": {
+       "build": "vitepress build docs",
+       "dev": "vitepress dev docs",
+       "test": "npm run check-node",
+       "standards": "npm run markdownlint && npm run eslint && npm run cspell && npm run commitlint",
+       "check-node": "check-node-version --node 20.12.2 --npm 10.5.0",
+       "commitlint": "commitlint --from 4ff129b0661d",
+       "cspell": "cspell . --show-suggestions --no-progress",
+       "eslint": "eslint .",
+       "markdownlint": "markdownlint **/*.md"
+    },
+    "repository": {
+       "type": "git",
+       "url": "git+ssh://git@github.com/uicpharm/vitepress-theme.git"
+    },
+    "author": "Josh Curtiss <josh@curtiss.me>",
+    "license": "UNLICENSED",
+    "dependencies": {
+       "vitepress": "1.1.4"
+    },
+    "devDependencies": {
+       "@uicpharm/standardization": "github:uicpharm/standardization#0.4.0"
+    }
+ }
