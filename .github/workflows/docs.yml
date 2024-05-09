@@ -1,0 +1,51 @@
+name: Deploy Documentation
+on:
+   workflow_call:
+   workflow_dispatch:
+   push:
+      branches:
+         - main
+jobs:
+   test:
+      name: Test
+      # We must manually provide these steps, instead of use actions and workflows in
+      # `uicpharm/workflows`, since this is a public repo and our workflows are private.
+      runs-on: ubuntu-latest
+      steps:
+         - uses: actions/checkout@v4
+           with: { fetch-depth: 0 }
+         - uses: actions/setup-node@v4
+           with:
+               node-version-file: ".nvmrc"
+               cache: "npm"
+         - run: npm ci
+         - run: npm run test --if-present
+         - run: npm run standards --if-present
+   deploy:
+      name: Deploy
+      needs: test
+      runs-on: ubuntu-latest
+      permissions:
+         contents: read
+         pages: write
+         id-token: write
+      environment:
+         name: github-pages
+         url: ${{ steps.deployment.outputs.page_url }}
+      steps:
+         # We must manually provide these steps, instead of use actions and workflows in
+         # `uicpharm/workflows`, since this is a public repo and our workflows are private.
+         - uses: actions/checkout@v4
+           with: { fetch-depth: 0 }
+         - uses: actions/setup-node@v4
+           with:
+               node-version-file: ".nvmrc"
+               cache: "npm"
+         - run: npm ci
+         - run: npm run build
+         - uses: actions/configure-pages@v2
+         - uses: actions/upload-pages-artifact@v1
+           with: { path: 'docs/.vitepress/dist' }
+         - name: Deploy
+           id: deployment
+           uses: actions/deploy-pages@v1
