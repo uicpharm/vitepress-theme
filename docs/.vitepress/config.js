@@ -8,6 +8,7 @@ export default defineConfig({
       socialLinks: [
          { icon: 'github', link: 'https://github.com/uicpharm/vitepress-theme' },
       ],
+      outline: 'deep',
       sidebar: [
          { text: 'Getting Started', link: '/getting-started' },
          { text: 'Sample Content', link: '/sample' },
