@@ -12,6 +12,11 @@ There should be whitespace between paragraphs.
 There should be whitespace between paragraphs. We recommend including a README, or a file
 with information about your project.
 
+<pre>
+Here is some text that is too long so that it goes into the aside bar. Notice how the
+aside bar nicely dims the content to make it easier to see the contents as you would hope.
+</pre>
+
 ## Header 2
 
 > This is a blockquote following a header.
